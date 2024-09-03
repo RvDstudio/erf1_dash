@@ -1,30 +1,39 @@
-import Header from "@/components/header";
+import Link from "next/link";
+import { LoginForm } from "./(auth)/login/login-form";
+
+import Image from "next/image";
 
 export default function Home() {
   return (
     <>
-      <Header />
-      <section className="bg-[#171717] min-h-screen pt-10">
-        <div className="max-w-7xl mx-auto bg-[#1f1f1f] border-[#2e2e2e] border rounded-md">
-          <h2 className="text-3xl text-[#FD9739] font-thin p-6 pb-3">
-            Welcome at Pc Builder
-          </h2>
-          <p className="text-lg text-[#888888] p-6 pt-0">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis
-            delectus odit quia vel eaque provident voluptatem corporis
-            reprehenderit est, quidem aliquid excepturi possimus optio ex, iste
-            aut saepe fuga ipsum! Dicta esse assumenda facilis odio atque,
-            maiores dolore nemo laudantium autem, voluptates explicabo quae
-            aliquam quia reprehenderit rerum modi alias perferendis magni omnis
-            molestiae numquam ducimus adipisci voluptas enim. Fugiat ipsam ut
-            qui officia quam aut architecto nam, assumenda exercitationem sint
-            deserunt soluta veniam eum expedita corporis illum voluptate illo,
-            ex consectetur dignissimos sapiente unde repellendus saepe. Beatae
-            quisquam, nam distinctio impedit provident alias totam autem aperiam
-            eaque illo fugit.
-          </p>
+      <div className="w-full lg:grid h-screen lg:grid-cols-2">
+        <div className="flex items-center justify-center py-12">
+          <div className="mx-auto grid w-[350px] gap-6">
+            <div className="grid gap-2 text-center">
+              <h1 className="text-3xl font-bold">Login</h1>
+              <p className="text-balance text-muted-foreground">
+                Enter your email below to login to your account
+              </p>
+            </div>
+            <LoginForm />
+            <div className="mt-4 text-center text-sm">
+              Don&apos;t have an account?{" "}
+              <Link href="register" className="underline">
+                Sign up
+              </Link>
+            </div>
+          </div>
         </div>
-      </section>
+        <div className="hidden bg-muted lg:block">
+          <Image
+            src="https://images.unsplash.com/photo-1484557985045-edf25e08da73?q=80&w=2146&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Image"
+            width="1920"
+            height="1080"
+            className="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+          />
+        </div>
+      </div>
     </>
   );
 }

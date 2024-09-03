@@ -9,7 +9,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "./ui/tooltip";
-import { useState, useRef } from "react";
+import { useState } from "react";
 
 const Sidebar = () => {
   const pathname = usePathname();
