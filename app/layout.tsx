@@ -5,6 +5,8 @@ import { SessionProvider } from "next-auth/react";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { TotalPriceProvider } from "@/context/TotalPriceContext";
+import { OrderProvider } from "@/context/OrderContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,7 +31,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SessionProvider>{children}</SessionProvider>
+          <SessionProvider>
+            <TotalPriceProvider>
+              <OrderProvider>{children}</OrderProvider>
+            </TotalPriceProvider>
+          </SessionProvider>
           <Toaster />
         </ThemeProvider>
       </body>

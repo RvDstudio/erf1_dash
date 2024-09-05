@@ -20,7 +20,7 @@ const Sidebar = () => {
     <div
       className={`${
         open ? "w-64" : "w-16 hidden md:block"
-      } bg-[#374C69] dark:bg-[#171717] border-r border-light-white dark:border-[#2e2e2e] h-screen p-3 pt-4 relative duration-300 z-40`}
+      } bg-[#374C69] dark:bg-[#171717] border-r border-light-white dark:border-[#2e2e2e] p-3 pt-4 h-screen sticky top-0 duration-300 z-40`}
     >
       <ArrowLeftSquareIcon
         onClick={() => setOpen(!open)}

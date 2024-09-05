@@ -60,3 +60,15 @@ export const verificationTokens = pgTable(
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
   })
 );
+
+export const products = pgTable("products", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  user_id: text("user_id").notNull(), // Reference to the user
+  product_name: text("product_name").notNull(),
+  description: text("description").notNull(),
+  short_description: text("short_description").notNull(),
+  quantity: text("quantity").notNull(),
+  price: text("price").notNull(),
+  image_url: text("image_url").notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
