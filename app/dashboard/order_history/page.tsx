@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useUser } from "@clerk/nextjs";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 
 type Product = {
@@ -16,15 +16,18 @@ type Product = {
 };
 
 export default function UserProducts() {
-  const { user } = useUser();
+  const { data: session, status } = useSession();
   const [products, setProducts] = useState<Product[]>([]);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    if (user) {
+    if (session?.user) {
+      // Changed 'user' to 'session?.user'
       const fetchUserProducts = async () => {
         try {
-          const response = await fetch(`/api/userProducts?user_id=${user.id}`);
+          const response = await fetch(
+            `/api/userProducts?user_id=${session.user}`
+          );
           const data = await response.json();
 
           if (response.ok) {
@@ -40,7 +43,7 @@ export default function UserProducts() {
 
       fetchUserProducts();
     }
-  }, [user]);
+  }, [session]);
 
   return (
     <div className="p-4">
