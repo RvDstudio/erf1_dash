@@ -25,12 +25,16 @@ export default function UserProducts() {
       // Changed 'user' to 'session?.user'
       const fetchUserProducts = async () => {
         try {
+          if (!session?.user) {
+            throw new Error("User is not defined.");
+          }
           const response = await fetch(
-            `/api/userProducts?user_id=${session.user}`
+            `/api/userProducts?user_id=${session.user.id}`
           );
           const data = await response.json();
 
-          if (response.ok) {
+          // Check if data.products exists
+          if (response.ok && data.products) {
             setProducts(data.products);
           } else {
             setErrorMessage(data.error || "Failed to fetch products.");
