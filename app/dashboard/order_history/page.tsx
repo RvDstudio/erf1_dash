@@ -22,20 +22,36 @@ export default function UserProducts() {
 
   useEffect(() => {
     if (session?.user) {
-      // Changed 'user' to 'session?.user'
       const fetchUserProducts = async () => {
         try {
-          if (!session?.user) {
-            throw new Error("User is not defined.");
-          }
-          const response = await fetch(
-            `/api/userProducts?user_id=${session.user.id}`
-          );
+          // Ensure session.user is defined before using it
+          const userId = session.user?.id; // Safely access user.id
+          const response = await fetch(`/api/userProducts?user_id=${userId}`);
           const data = await response.json();
 
-          // Check if data.products exists
+          console.log("API Response:", data); // Log the API response
+
           if (response.ok && data.products) {
-            setProducts(data.products);
+            // Combine products with the same product_name
+            const combinedProducts = data.products.reduce(
+              (acc: Product[], product: Product) => {
+                const existingProduct = acc.find(
+                  (p) => p.product_name === product.product_name
+                );
+                if (existingProduct) {
+                  existingProduct.quantity = (
+                    parseInt(existingProduct.quantity) +
+                    parseInt(product.quantity)
+                  ).toString();
+                } else {
+                  acc.push({ ...product, quantity: product.quantity }); // Ensure quantity is set
+                }
+                return acc;
+              },
+              []
+            );
+            console.log("Combined Products:", combinedProducts); // Log combined products
+            setProducts(combinedProducts);
           } else {
             setErrorMessage(data.error || "Failed to fetch products.");
           }
@@ -51,67 +67,48 @@ export default function UserProducts() {
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl text-[#374c69]  mb-4">Recente bestellingen</h1>
+      <h1 className="text-2xl text-[#374c69] mb-4">Recente bestellingen</h1>
       {errorMessage && <div className="text-red-600">{errorMessage}</div>}
-      <div className="">
+      <div>
         <table className="min-w-full leading-normal">
           <thead>
             <tr>
-              <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                Product
-              </th>
-              <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                Title
-              </th>
-              <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                Status
-              </th>
-              <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                Role
-              </th>
+              <th>Product</th>
+              <th>Title</th>
+              <th>Status</th>
+              <th>Role</th>
+              <th>Quantity</th>
             </tr>
           </thead>
           <tbody className="bg-white">
             {products.map((product) => (
               <tr key={product.id}>
-                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                <td>
                   <div className="flex items-center">
-                    <div className="flex-shrink-0 h-10 w-10">
-                      <Image
-                        className="h-10 w-10 rounded-md"
-                        src={product.image_url}
-                        alt=""
-                        width={40}
-                        height={40}
-                      />
-                    </div>
+                    <Image
+                      src={product.image_url}
+                      alt=""
+                      width={40}
+                      height={40}
+                    />
                     <div className="ml-4">
-                      <div className="text-sm leading-5 font-medium text-gray-900">
-                        {product.product_name}
-                      </div>
-                      <div className="text-sm leading-5 text-gray-500">
-                        bernardlane@example.com
-                      </div>
+                      <div>{product.product_name}</div>
+                      <div>bernardlane@example.com</div>
                     </div>
                   </div>
                 </td>
-                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                  <div className="text-sm leading-5 text-gray-900">
-                    Director
-                  </div>
-                  <div className="text-sm leading-5 text-gray-500">
-                    Human Resources
-                  </div>
+                <td>
+                  <div>Director</div>
+                  <div>Human Resources</div>
                 </td>
-                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                  <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                    Op Voorraad
-                  </span>
+                <td>
+                  <span>Op Voorraad</span>
                 </td>
-                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                  <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-[#374c69] text-white cursor-pointer">
-                    Opnieuw Bestellen
-                  </span>
+                <td>
+                  <span>Opnieuw Bestellen</span>
+                </td>
+                <td>
+                  <div>{product.quantity}</div>
                 </td>
               </tr>
             ))}

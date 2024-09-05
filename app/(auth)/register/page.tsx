@@ -1,14 +1,15 @@
 import { RegisterForm } from "./register-form";
 import { Suspense } from "react";
 import Image from "next/image";
-import Link from "next/link";
 
 export default async function RegisterPage() {
   return (
     <div className="w-full lg:grid  lg:grid-cols-2 ">
       <div className="flex flex-col items-center justify-center h-screen py-12">
         <div className="grid gap-2 text-center">
-          <h1 className="text-3xl font-bold">Register</h1>
+          <h1 className="text-3xl font-bold">
+            Registreer hier voor je Erf1 account
+          </h1>
           <p className="text-balance text-muted-foreground mb-6">
             Enter your username and email below to create your account
           </p>

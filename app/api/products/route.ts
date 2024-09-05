@@ -1,7 +1,7 @@
 // app/api/products/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import db from "@/db/index";
-import { products } from "@/db/schema";
+import {db} from "@/database/index";
+import { products } from "@/database/schema";
 
 export async function POST(req: NextRequest) {
   try {
