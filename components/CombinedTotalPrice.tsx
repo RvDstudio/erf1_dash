@@ -1,10 +1,7 @@
 "use client";
 // components/CombinedTotalPrice.tsx
-<<<<<<< HEAD
-import { useTotalPrice } from "../context/TotalPriceContext";
-=======
+
 import { useTotalPrice } from "@/context/TotalPriceContext";
->>>>>>> 194c92f374ea076c64bca414e5bb9385181fa015
 
 export default function CombinedTotalPrice() {
   const { getTotalPrice } = useTotalPrice();
