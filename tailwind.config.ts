@@ -58,7 +58,6 @@ const config: Config = {
   		},
   		
   		container: {
-  			center: 'true',
   			padding: '1rem',
   			screens: {
   				lg: '1125px',
