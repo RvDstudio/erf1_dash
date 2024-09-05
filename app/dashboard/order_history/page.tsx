@@ -56,7 +56,7 @@ export default function UserProducts() {
   }, [session]);
 
   return (
-    <div className="p-4">
+    <div className="p-4 pt-16">
       {errorMessage && <p className="text-red-500">{errorMessage}</p>}
       {products.length > 0 ? (
         <Table>
@@ -71,8 +71,11 @@ export default function UserProducts() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {products.map((product) => (
-              <TableRow key={product.id}>
+            {products.map((product, index) => (
+              <TableRow
+                key={product.id}
+                className={`${index % 2 === 0 ? "bg-gray-100" : "bg-white"}`}
+              >
                 <TableCell>
                   <Image
                     src={product.image_url}
