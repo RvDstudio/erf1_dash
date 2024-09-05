@@ -1,12 +1,21 @@
+<<<<<<< HEAD
+=======
+// components/ZuivelList.tsx
+>>>>>>> 194c92f374ea076c64bca414e5bb9385181fa015
 "use client";
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation"; // Import useRouter from next/navigation
 import { Zuivel } from "./types"; // Assuming types are defined in a separate file
+<<<<<<< HEAD
 import { useTotalPrice } from "@/context/TotalPriceContext";
 import { PlusIcon } from "lucide-react";
 import { useSession } from "next-auth/react"; // Import useSession from NextAuth
+=======
+import { useTotalPrice } from "../context/TotalPriceContext";
+import { PlusIcon } from "lucide-react";
+>>>>>>> 194c92f374ea076c64bca414e5bb9385181fa015
 
 interface ZuivelListProps {
   zuivel: Zuivel[];
@@ -22,7 +31,10 @@ export default function ZuivelList({
   );
   const { setTotalPrice } = useTotalPrice();
   const router = useRouter(); // Initialize useRouter
+<<<<<<< HEAD
   const { data: session } = useSession(); // Get session data
+=======
+>>>>>>> 194c92f374ea076c64bca414e5bb9385181fa015
 
   useEffect(() => {
     const total = zuivel.reduce((total, zuivel) => {
@@ -48,19 +60,25 @@ export default function ZuivelList({
   };
 
   const handleOrder = async () => {
+<<<<<<< HEAD
     if (!session) {
       // Handle case where user is not authenticated
       alert("You must be logged in to place an order.");
       return;
     }
 
+=======
+>>>>>>> 194c92f374ea076c64bca414e5bb9385181fa015
     const selectedProducts = zuivel.filter((z) => quantities[z.id] > 0);
 
     await fetch("/api/storeOrder", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+<<<<<<< HEAD
         Authorization: `Bearer ${(session as any).accessToken}`, // Use access token from session with type casting
+=======
+>>>>>>> 194c92f374ea076c64bca414e5bb9385181fa015
       },
       body: JSON.stringify({ selectedProducts, quantities }),
     });
