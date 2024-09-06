@@ -19,7 +19,7 @@ import { ThemeToggle } from "./ThemeToggle";
 
 export default function Header() {
   return (
-    <header className="fixed w-full  top-0 left-0 flex h-screen  max-h-[60px] items-center border-b  bg-white dark:bg-[#1f1f1f] px-4 md:px-6 z-20">
+    <header className="fixed w-full  top-0 left-0 flex py-3 items-center border-b  bg-white dark:bg-[#1f1f1f] px-4 md:px-6 z-20">
       <div className="md:hidden ">
         <MobileSidebar />
       </div>
