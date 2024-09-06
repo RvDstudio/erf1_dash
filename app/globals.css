@@ -1,6 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.sticky {
+  position: relative;
+  position: -webkit-sticky;
+  position: sticky;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

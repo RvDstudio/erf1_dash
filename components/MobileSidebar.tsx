@@ -9,6 +9,7 @@ import {
   Settings,
   ShoppingBag,
   Stamp,
+  Tractor,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -83,9 +84,22 @@ export function MobileSidebar() {
   return (
     <Sheet key="left">
       <SheetTrigger asChild>
-        <Menu className="h-6 w-6" />
+        <Menu className="h-6 w-6 pr-1" />
       </SheetTrigger>
-      <SheetContent side={"left"} className="w-[300px] sm:w-[540px]">
+      <SheetContent
+        side={"left"}
+        className="w-[300px] sm:w-[540px] bg-[#374c69] border-r border-[#374c69]"
+      >
+        <div className="flex gap-x-2 items-center border-b border-dashed border-[#6d9ecf] pb-[11px]">
+          <Tractor
+            className={`text-white dark:text-white cursor-pointer duration-500 h-7 w-7`}
+          />
+          <h1
+            className={`text-white dark:text-white origin-left font-medium text-[22px] duration-200 `}
+          >
+            Erf1<span className="text-[#6d9ecf]"> Bestellingen</span>
+          </h1>
+        </div>
         <ul className="pt-6 space-y-3">
           {Menus.map((menu, index) => (
             <div key={index}>
