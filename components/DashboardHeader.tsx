@@ -19,15 +19,11 @@ import { ThemeToggle } from "./ThemeToggle";
 
 export default function Header() {
   return (
-    <header className="fixed top-0 flex h-screen w-[97%] max-h-[60px] items-center border-b overflow-hidden bg-white dark:bg-[#1f1f1f] px-4 md:px-6 z-20">
+    <header className="fixed w-full  top-0 left-0 flex h-screen  max-h-[60px] items-center border-b  bg-white dark:bg-[#1f1f1f] px-4 md:px-6 z-20">
       <div className="md:hidden ">
         <MobileSidebar />
       </div>
-      <Link href="#" className="pl-5 flex items-center gap-2" prefetch={false}>
-        <span className="text-lg dark:text-[#6699cc] font-semibold hidden md:inline-block">
-          Dashboard
-        </span>
-      </Link>
+
       <div className="ml-auto flex items-center gap-4">
         <form className="flex-1 max-w-[150px]">
           <div className="relative">
