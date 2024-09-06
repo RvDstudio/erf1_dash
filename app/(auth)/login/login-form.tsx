@@ -2,13 +2,13 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState, Suspense } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
 import { LoginUserInput, loginUserSchema } from "@/lib/user-schema";
-import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 
 // Create a fallback component
 const SearchParamsFallback = () => <>Loading...</>;
@@ -17,9 +17,7 @@ export const LoginForm = () => {
   const router = useRouter();
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
-
-  const searchParams = useSearchParams(); // Correctly use the hook
-  const callbackUrl = searchParams.get("callbackUrl") || "/dashboard"; // Now this works
+  const [callbackUrl, setCallbackUrl] = useState("/dashboard"); // New state for callbackUrl
 
   const methods = useForm<LoginUserInput>({
     resolver: zodResolver(loginUserSchema),
@@ -71,21 +69,13 @@ export const LoginForm = () => {
         <p className="text-center bg-red-300 py-4 mb-6 rounded">{error}</p>
       )}
       <Suspense fallback={<SearchParamsFallback />}>
-        {" "}
-        {/* Wrap with Suspense */}
-        <div className="mb-6">
-          <input
-            type="email"
-            {...register("email")}
-            placeholder="Email address"
-            className={`${input_style} py-[15px]`}
-          />
-          {errors["email"] && (
-            <span className="text-red-500 text-xs pt-1 block">
-              {errors["email"]?.message as string}
-            </span>
-          )}
-        </div>
+        {/* Pass setCallbackUrl to update the callbackUrl state */}
+        <SearchParamsWrapper
+          inputStyle={input_style}
+          register={register}
+          errors={errors}
+          setCallbackUrl={setCallbackUrl}
+        />
       </Suspense>
       <div className="mb-6">
         <input
@@ -130,5 +120,37 @@ export const LoginForm = () => {
         Continue with Google
       </a>
     </form>
+  );
+};
+
+// Extracted component that uses searchParams
+const SearchParamsWrapper = ({
+  inputStyle,
+  register,
+  errors,
+  setCallbackUrl,
+}: any) => {
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
+
+  // Update the callbackUrl state in the parent component
+  setCallbackUrl(callbackUrl);
+
+  return (
+    <>
+      <div className="mb-6">
+        <input
+          type="email"
+          {...register("email")}
+          placeholder="Email address"
+          className={`${inputStyle} py-[15px]`}
+        />
+        {errors["email"] && (
+          <span className="text-red-500 text-xs pt-1 block">
+            {errors["email"]?.message as string}
+          </span>
+        )}
+      </div>
+    </>
   );
 };

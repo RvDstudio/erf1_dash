@@ -1,19 +1,17 @@
-// app/api/userProducts/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import {db} from "@/database/index";
+import { db } from "@/database/index";
 import { products } from "@/database/schema";
-import { sql } from "drizzle-orm"; // Ensure this is correctly imported
+import { sql } from "drizzle-orm";
 
 export async function GET(req: NextRequest) {
   try {
-    const { searchParams } = new URL(req.url); // Create a URL object from req.url
-    const userId = searchParams.get("user_id"); // Use searchParams from the URL object
+    const { searchParams } = req.nextUrl;
+    const userId = searchParams.get("user_id");
 
     if (!userId) {
       return NextResponse.json({ error: "User ID is required" }, { status: 400 });
     }
 
-    // Use raw SQL or a different Drizzle query method if needed
     const userProducts = await db.select()
       .from(products)
       .where(sql`${products.user_id} = ${userId}`);
