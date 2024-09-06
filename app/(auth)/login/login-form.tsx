@@ -10,6 +10,9 @@ import { signIn } from "next-auth/react";
 import { LoginUserInput, loginUserSchema } from "@/lib/user-schema";
 import { Suspense } from "react";
 
+// Create a fallback component
+const SearchParamsFallback = () => <>Loading...</>;
+
 export const LoginForm = () => {
   const router = useRouter();
   const [error, setError] = useState("");
@@ -67,19 +70,23 @@ export const LoginForm = () => {
       {error && (
         <p className="text-center bg-red-300 py-4 mb-6 rounded">{error}</p>
       )}
-      <div className="mb-6">
-        <input
-          type="email"
-          {...register("email")}
-          placeholder="Email address"
-          className={`${input_style} py-[15px]`}
-        />
-        {errors["email"] && (
-          <span className="text-red-500 text-xs pt-1 block">
-            {errors["email"]?.message as string}
-          </span>
-        )}
-      </div>
+      <Suspense fallback={<SearchParamsFallback />}>
+        {" "}
+        {/* Wrap with Suspense */}
+        <div className="mb-6">
+          <input
+            type="email"
+            {...register("email")}
+            placeholder="Email address"
+            className={`${input_style} py-[15px]`}
+          />
+          {errors["email"] && (
+            <span className="text-red-500 text-xs pt-1 block">
+              {errors["email"]?.message as string}
+            </span>
+          )}
+        </div>
+      </Suspense>
       <div className="mb-6">
         <input
           type="password"
