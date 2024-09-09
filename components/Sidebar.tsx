@@ -19,8 +19,8 @@ const Sidebar = () => {
   return (
     <div
       className={`${
-        open ? "w-64 hidden md:block" : "w-16 hidden md:block"
-      } bg-[#374C69] dark:bg-[#171717] border-r border-light-white dark:border-[#2e2e2e] p-3 pt-4 h-screen sticky top-0 duration-300 z-40`}
+        open ? "w-72  hidden md:block" : "w-18 hidden md:block"
+      } bg-[#374C69] dark:bg-[#171717] border-r border-light-white dark:border-[#2e2e2e] p-4 pt-4 h-screen sticky top-0 duration-300 z-40`}
     >
       <ArrowLeftSquareIcon
         onClick={() => setOpen(!open)}
@@ -28,9 +28,10 @@ const Sidebar = () => {
           !open && "rotate-180"
         }`}
       />
-      <div className="flex gap-x-2 items-center border-b pb-[11px]">
+      <div className="flex gap-x-2 items-center border-b border-[#425b7b] pb-[18px]">
         <Tractor
-          className={`text-white dark:text-white cursor-pointer duration-500 h-7 w-7`}
+          strokeWidth={1}
+          className={`text-white pl-1 dark:text-white cursor-pointer duration-500 h-8 w-8`}
         />
         <h1
           className={`text-white dark:text-white origin-left font-medium text-[22px] duration-200 ${
@@ -41,7 +42,7 @@ const Sidebar = () => {
         </h1>
       </div>
 
-      <ul className="pt-6 space-y-2">
+      <ul className="pt-4 space-y-3">
         {Menus.map((menu, index) => (
           <div key={index}>
             {menu.gap && (
@@ -52,9 +53,9 @@ const Sidebar = () => {
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Link
-                      className={`w-full flex items-center space-x-2 hover:bg-[#6699CC] dark:hover:bg-[#292929] active:bg-gray-300 py-2 px-2 rounded-lg text-[#9c9c9c] ${
+                      className={`w-full flex items-center space-x-2 hover:bg-[#6699CC] dark:hover:bg-[#292929] active:bg-gray-300 py-3 px-2 rounded-lg text-white ${
                         isActive(menu.path)
-                          ? "bg-[#6699CC] text-white dark:bg-[#292929]"
+                          ? "bg-[#30425b] border border-[#425b7b] text-white dark:bg-[#292929]"
                           : ""
                       }`}
                       href={menu.path}

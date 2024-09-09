@@ -1,6 +1,8 @@
 import {
+  BaggageClaim,
   BellDot,
   BlocksIcon,
+  Caravan,
   Podcast,
   Scale,
   Settings,
@@ -19,54 +21,35 @@ interface MenuItem {
 
 export const Menus: MenuItem[] = [
   {
-    title: "Profile",
+    title: "Profiel",
     notification: 0,
     icon: <User className="w-5 h-5" />,
     path: "/dashboard/profile",
   },
   {
-    title: "Products",
+    title: "Producten",
     notification: 0,
     icon: <ShoppingBag className="w-5 h-5" />,
     path: "/dashboard/products",
   },
   {
-    title: "Loyalty Cards",
-    icon: <Stamp className="w-5 h-5" />,
-    gap: true,
+    title: "Orders",
+    notification: 0,
+    icon: <BaggageClaim className="w-5 h-5" />,
+    path: "/subscriptions",
+  },
+  {
+    title: "Camperplekken",
+    icon: <Caravan className="w-5 h-5" />,
+    gap: false,
     notification: 0,
     path: "/loyalty-cards",
   },
   {
-    title: "Subscriptions",
+    title: "Agro Diëtetiek",
     notification: 0,
-    icon: <Podcast className="w-5 h-5" />,
-    path: "/subscriptions",
-  },
-  {
-    title: "Debts",
-    notification: 6,
-    gap: true,
+    gap: false,
     icon: <BlocksIcon className="w-5 h-5" />,
     path: "/debts",
-  },
-  {
-    title: "Legal information",
-    notification: 3,
-    icon: <Scale className="w-5 h-5" />,
-    path: "/legal-information",
-  },
-  {
-    title: "Notifications",
-    icon: <BellDot className="w-5 h-5" />,
-    gap: false,
-    notification: 0,
-    path: "/notifications",
-  },
-  {
-    title: "Setting",
-    notification: 0,
-    icon: <Settings className="w-5 h-5" />,
-    path: "/settings",
   },
 ];
