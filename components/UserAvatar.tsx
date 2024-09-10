@@ -23,13 +23,13 @@ export default function UserAvatar() {
   const { data } = useSession({
     required: true,
     onUnauthenticated() {
-      router.push("/api/auth/signin");
+      router.push("/login");
     },
   });
 
   const user = data?.user;
 
-  //console.log(user);
+  console.log(user);
 
   return (
     <DropdownMenu>

@@ -2,7 +2,7 @@
 import { ArrowLeftSquareIcon, Tractor, Milk } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { Menus, Menus2 } from "../constants/constants";
+import { Menus } from "../constants/constants";
 import {
   TooltipProvider,
   Tooltip,
@@ -10,11 +10,18 @@ import {
   TooltipTrigger,
 } from "./ui/tooltip";
 import { useState } from "react";
+import { useSession } from "next-auth/react"; // Import useSession
 
 const Sidebar = () => {
+  const { data: session } = useSession(); // Get session data
   const pathname = usePathname();
   const isActive = (path: string) => path === pathname;
   const [open, setOpen] = useState<boolean>(true);
+
+  // Filter menus based on admin status
+  const filteredMenus = Menus.filter(
+    (menu) => !menu.isAdmin || session?.user?.isAdmin === 1
+  );
 
   return (
     <div
@@ -43,7 +50,7 @@ const Sidebar = () => {
       </div>
 
       <ul className="pt-4 space-y-3">
-        {Menus.map((menu, index) => (
+        {filteredMenus.map((menu, index) => (
           <div key={index}>
             {menu.gap && (
               <div className="my-4 border-t border-dashed border-[#6699CC] dark:border-gray-600" />

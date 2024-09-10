@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Zuivel } from "@/components/types"; // Assuming types are defined in a separate file
+import { Zuivel } from "@/types"; // Assuming types are defined in a separate file
 import { useOrder } from "@/context/OrderContext";
-import { useSession } from "next-auth/react"; // Change from Clerk to NextAuth
+import { useSession } from "next-auth/react";
 
 export default function Order() {
   const { orderData, setOrderData } = useOrder();

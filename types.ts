@@ -36,15 +36,16 @@
   password?: string;
   emailVerified?: Date;
   image?: string;
-  role?: string;
+  role: string;
   isAdmin: boolean; // 0 for false, 1 for true
 }
  export interface Session {
     user: {
       id: string;
-      email: string;
-      name: string;
-      isAdmin: boolean; // Add isAdmin to the Session type
+    email: string;
+    name: string;
+    isAdmin: boolean; // Ensure this is included
+    role?: string; // Add this line to include the role property
     }
   }
 
