@@ -5,15 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1725396647300,
-      "tag": "0000_awesome_talisman",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1725917416145,
-      "tag": "0001_sloppy_agent_zero",
+      "when": 1725992747424,
+      "tag": "0000_natural_jackal",
       "breakpoints": true
     }
   ]

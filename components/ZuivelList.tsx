@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation"; // Import useRouter from next/navigation
-import { Zuivel } from "./types"; // Assuming types are defined in a separate file
+import { Zuivel } from "../types"; // Assuming types are defined in a separate file
 
 import { useTotalPrice } from "@/context/TotalPriceContext";
 import { PlusIcon } from "lucide-react";

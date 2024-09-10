@@ -1,7 +1,7 @@
 "use client";
 // context/OrderContext.tsx
 import { createContext, useContext, useState, ReactNode } from "react";
-import { Zuivel } from "../components/types"; // Assuming types are defined in a separate file
+import { Zuivel } from "../types"; // Assuming types are defined in a separate file
 
 interface OrderContextType {
   orderData: {

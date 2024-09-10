@@ -1,6 +1,6 @@
 // components/VleesProducts.tsx
 import VleesList from "./VleesList";
-import { Product } from "./types";
+import { Product } from "../types";
 
 async function getData(): Promise<any> {
   const res = await fetch(

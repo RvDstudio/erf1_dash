@@ -1,5 +1,5 @@
 // components/types.ts-
-export interface Product {
+ export interface Product {
   id: string;
   name: string;
   regular_price: number;
@@ -7,14 +7,14 @@ export interface Product {
   stock_status: "instock" | "outofstock";
 }
 
-export interface Zuivel {
+ export interface Zuivel {
   id: string;
   name: string;
   images: { src: string }[];
   regular_price: string;
   stock_status: string;
 }
-export interface Kaas {
+ export interface Kaas {
   id: string;
   name: string;
   images: { src: string }[];
@@ -22,10 +22,29 @@ export interface Kaas {
   stock_status: string;
 }
 
-export interface Vlees {
+ export interface Vlees {
   id: string;
   name: string;
   images: { src: string }[];
   regular_price: string;
   stock_status: string;
 }
+ export interface User {
+  id: string;
+  name?: string;
+  email: string;
+  password?: string;
+  emailVerified?: Date;
+  image?: string;
+  role?: string;
+  isAdmin: boolean; // 0 for false, 1 for true
+}
+ export interface Session {
+    user: {
+      id: string;
+      email: string;
+      name: string;
+      isAdmin: boolean; // Add isAdmin to the Session type
+    }
+  }
+

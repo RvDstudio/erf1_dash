@@ -2,7 +2,7 @@
 import { ArrowLeftSquareIcon, Tractor, Milk } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { Menus } from "../constants/constants";
+import { Menus, Menus2 } from "../constants/constants";
 import {
   TooltipProvider,
   Tooltip,
