@@ -46,7 +46,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           id: user.id,
           email: user.email,
           name: user.name,
-          randomKey: "Hey cool",
+          isAdmin: user.isAdmin, // Assuming this field exists in your database
         };
       },
     }),
@@ -73,17 +73,19 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           ...token,
           id: u.id,
           randomKey: u.randomKey,
+          isAdmin: u.isAdmin, // Add isAdmin to the token
         };
       }
       return token;
     },
-    session(params) {
+    session: ({ session, token }) => {
       return {
-        ...params.session,
+        ...session,
         user: {
-          ...params.session.user,
-          id: params.token.id as string,
-          randomKey: params.token.randomKey,
+          ...session.user,
+          id: token.id as string,
+          randomKey: token.randomKey,
+          isAdmin: token.isAdmin, // Add isAdmin to the session
         },
       };
     },

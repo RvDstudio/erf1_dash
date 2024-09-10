@@ -15,6 +15,7 @@ export const users = pgTable('user', {
   password: text('password'),
   emailVerified: timestamp('emailVerified', { mode: 'date' }),
   image: text('image'),
+  isAdmin: integer('isAdmin').default(0), // Add isAdmin field as an integer (0 for false, 1 for true)
 });
 
 export const accounts = pgTable(
