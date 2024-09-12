@@ -1,4 +1,4 @@
-import ProductForm from "@/forms/ProductUpload";
+import ProductForm from "@/src/forms/ProductUpload";
 import React from "react";
 
 export default function ProductUpload() {
