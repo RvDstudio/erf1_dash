@@ -5,8 +5,9 @@ import { sql } from "drizzle-orm";
 
 export async function GET(req: NextRequest) {
   try {
-    const { searchParams } = req.nextUrl;
-    const userId = searchParams.get("user_id");
+    // Use URL constructor to get searchParams
+    const url = new URL(req.url);
+    const userId = url.searchParams.get("user_id");
 
     if (!userId) {
       return NextResponse.json({ error: "User ID is required" }, { status: 400 });

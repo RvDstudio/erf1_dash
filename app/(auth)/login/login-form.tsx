@@ -11,8 +11,18 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
+import React, { Suspense } from "react";
 
 export const LoginForm = () => {
+  // Wrap the useSearchParams in Suspense
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <InnerLoginForm />
+    </Suspense>
+  );
+};
+
+const InnerLoginForm = () => {
   const router = useRouter();
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
