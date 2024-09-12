@@ -22,7 +22,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           id: profile.id,
           email: profile.email,
           name: profile.name,
-          // We do not get isAdmin here from Google, so it will be fetched in jwt callback
+          image: profile.picture,
         };
       },
     }),

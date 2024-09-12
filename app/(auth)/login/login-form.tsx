@@ -23,6 +23,7 @@ export const LoginForm = () => {
   const methods = useForm<LoginUserInput>({
     resolver: zodResolver(loginUserSchema),
     mode: "onChange", // Ensures errors are updated as you type
+    shouldUnregister: true,
   });
 
   const {
@@ -36,6 +37,7 @@ export const LoginForm = () => {
     try {
       setSubmitting(true);
 
+      // Proceed with credentials sign-in
       const res = await signIn("credentials", {
         redirect: false,
         email: values.email,
@@ -62,6 +64,19 @@ export const LoginForm = () => {
     }
   };
 
+  // Separate function to handle Google login without form submission
+  const handleGoogleLogin = async () => {
+    try {
+      setSubmitting(true);
+      await signIn("google", { callbackUrl });
+      setSubmitting(false);
+    } catch (error: any) {
+      toast.error(error.message);
+      setError(error.message);
+      setSubmitting(false);
+    }
+  };
+
   const input_style =
     "form-control block w-full px-4 py-5 text-sm font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none";
 
@@ -69,12 +84,12 @@ export const LoginForm = () => {
     <Card className="mx-auto w-[400px] max-w-sm">
       <CardContent>
         <form onSubmit={handleSubmit(onSubmitHandler)}>
-          <div className="grid gap-4 mt-8">
-            <div className="grid gap-2">
+          <div className="grid gap-4 mt-10">
+            <div className="grid gap-4">
               <Label htmlFor="email">Email</Label>
               <input
                 type="email"
-                {...register("email")}
+                {...register("email", { required: true })}
                 placeholder="Email address"
                 className={`${input_style} py-[10px]`}
               />
@@ -84,8 +99,8 @@ export const LoginForm = () => {
                 </span>
               )}
             </div>
-            <div className="grid gap-2">
-              <div className="flex items-center">
+            <div className="grid gap-4">
+              <div className="flex items-center mb-2">
                 <Label htmlFor="password">Password</Label>
                 <Link
                   href="#"
@@ -96,7 +111,7 @@ export const LoginForm = () => {
               </div>
               <input
                 type="password"
-                {...register("password")}
+                {...register("password", { required: true })}
                 placeholder="Password"
                 className={`${input_style} py-[10px]`}
               />
@@ -108,25 +123,26 @@ export const LoginForm = () => {
             </div>
             <Button
               type="submit"
-              className="w-full bg-[#374c69] hover:bg-[#374c69]/90"
+              className="w-full mt-2 bg-[#374c69] hover:bg-[#374c69]/90"
               disabled={submitting}
             >
               {submitting ? "Logging in..." : "Login"}
             </Button>
             <Button
               variant="outline"
-              onClick={() => signIn("google", { callbackUrl })}
+              onClick={handleGoogleLogin} // Separate handler
               className="w-full"
               disabled={submitting}
+              type="button" // Ensure this button is not a submit button
             >
               Login with Google
             </Button>
           </div>
         </form>
         <div className="mt-4 text-center text-sm">
-          Heeft u geen account?{" "}
+          Don&apos;t have an account?{" "}
           <Link href="/register" className="underline">
-            Account aanmaken
+            Sign up
           </Link>
         </div>
       </CardContent>
