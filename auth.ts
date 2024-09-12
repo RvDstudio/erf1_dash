@@ -58,6 +58,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           email: user.email,
           name: user.name,
           isAdmin: user.isAdmin, // Assuming this field exists in your database
+          isModerator: user.isModerator, // Add isModerator field
         };
       },
     }),
@@ -70,7 +71,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         nextUrl.pathname.startsWith(path)
       );
 
-      if (isProtected && !isLoggedIn) {
+      // Check if user is not an admin or a moderator
+      const isAdmin = auth?.user?.isAdmin;
+      const isModerator = auth?.user?.isModerator;
+
+      if (isProtected && (!isLoggedIn || (!isAdmin && !isModerator))) {
         const redirectUrl = new URL("/login", nextUrl.origin);
         redirectUrl.searchParams.append("callbackUrl", nextUrl.href);
         return Response.redirect(redirectUrl);
@@ -85,6 +90,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           id: u.id,
           randomKey: u.randomKey,
           isAdmin: u.isAdmin, // Add isAdmin to the token
+          isModerator: u.isModerator, // Add isModerator to the token
         };
       }
 
@@ -95,6 +101,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         });
         if (userFromDb) {
           token.isAdmin = userFromDb.isAdmin; // Set isAdmin from the database
+          token.isModerator = userFromDb.isModerator; // Set isModerator from the database
         }
       }
       return token;
@@ -107,6 +114,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           id: token.id as string,
           randomKey: token.randomKey,
           isAdmin: token.isAdmin, // Add isAdmin to the session
+          isModerator: token.isModerator, // Add isModerator to the session
         },
       };
     },

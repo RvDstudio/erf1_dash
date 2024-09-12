@@ -1,0 +1,1 @@
+ALTER TABLE "user" ADD COLUMN "isModerator" integer DEFAULT 0;

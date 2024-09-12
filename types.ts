@@ -38,6 +38,7 @@
   image?: string;
   role: string;
   isAdmin: boolean; // 0 for false, 1 for true
+  isModerator: boolean;
 }
  export interface Session {
     user: {
@@ -45,6 +46,7 @@
     email: string;
     name: string;
     isAdmin: boolean; // Ensure this is included
+    isModerator: boolean;
     role?: string; // Add this line to include the role property
     }
   }

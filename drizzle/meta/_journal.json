@@ -8,6 +8,13 @@
       "when": 1725992747424,
       "tag": "0000_natural_jackal",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1726161265665,
+      "tag": "0001_groovy_george_stacy",
+      "breakpoints": true
     }
   ]
 }
