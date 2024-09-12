@@ -3,7 +3,7 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { Kaas } from "../types";
+import { Kaas } from "@/types";
 import { useTotalPrice } from "../context/TotalPriceContext";
 
 interface KaasListProps {

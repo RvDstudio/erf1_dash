@@ -1,6 +1,6 @@
 // components/KaasProducts.tsx
 import KaasList from "./KaasList";
-import { Product } from "../types";
+import { Product } from "@/types";
 
 async function getData(): Promise<any> {
   const res = await fetch(
