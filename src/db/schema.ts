@@ -5,6 +5,7 @@ import {
   primaryKey,
   integer,
   uuid,
+  varchar,
 } from 'drizzle-orm/pg-core';
 import type { AdapterAccount } from 'next-auth/adapters';
 
@@ -14,7 +15,7 @@ export const users = pgTable('user', {
   email: text('email').unique().notNull(),
   password: text('password'),
   emailVerified: timestamp('emailVerified', { mode: 'date' }),
-  image: text('image'),
+  image: varchar('image', { length: 255 }),
   isAdmin: integer('isAdmin').default(0), // Ensure this field exists in your schema
   isModerator: integer('isModerator').default(0), // Ensure this field exists in your schema
   role: text('role'), // New field for role

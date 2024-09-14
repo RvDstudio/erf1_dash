@@ -1,12 +1,12 @@
 import { auth } from "@/auth";
-import Image from "next/image";
 import { redirect } from "next/navigation";
+import ProfileImageUpload from "@/src/components/ProfileImageUpload";
 
 export default async function ProfilePage() {
   const session = await auth();
 
   if (!session?.user) {
-    return redirect("/login");
+    return redirect("/signin");
   }
 
   const user = session?.user;
@@ -15,19 +15,14 @@ export default async function ProfilePage() {
     <div className="pt-10 pl-10 pr-8 pb-10 bg-[#f7f7f7] dark:bg-[#171717] h-screen">
       <div className="flex px-4 py-5 sm:px-6">
         <div className="relative">
-          <Image
-            src={user?.image ? user.image : "/images/default.png"}
-            alt={`profile photo of ${user?.name}`}
-            width={90}
-            height={90}
-            className="mr-6 rounded-md"
-          />
+          {/* Pass the current user image URL to the client component */}
+          <ProfileImageUpload imageUrl={user?.image || ""} />
         </div>
         <div className="">
           <h3 className="text-lg leading-6 font-medium dark:text-[#6699cc] text-gray-600">
             {user?.name}
           </h3>
-          <p className="mt-1 max-w-2xl text-sm text-gray-500 dark:text-[#888888]            ">
+          <p className="mt-1 max-w-2xl text-sm text-gray-500 dark:text-[#888888]">
             Details and informations about user.
           </p>
         </div>
