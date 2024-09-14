@@ -6,7 +6,7 @@ export default async function ProfilePage() {
   const session = await auth();
 
   if (!session?.user) {
-    return redirect("/signin");
+    return redirect("/login");
   }
 
   const user = session?.user;
