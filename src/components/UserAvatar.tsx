@@ -29,7 +29,7 @@ export default function UserAvatar() {
 
   const user = data?.user;
 
-  console.log(user);
+  //console.log(user);
 
   return (
     <DropdownMenu>
