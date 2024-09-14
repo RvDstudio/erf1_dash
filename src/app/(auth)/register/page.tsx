@@ -19,7 +19,7 @@ export default async function RegisterPage() {
       <div className="hidden h-screen bg-muted lg:block">
         <div className="w-full h-screen relative pt-[100%]">
           <Image
-            src="/images/login_bg.jpg"
+            src="/images/login_bg.png"
             alt="profile"
             fill
             className="w-full h-full top-0 left-0 object-cover"
