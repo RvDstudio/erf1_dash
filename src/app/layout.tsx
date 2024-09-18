@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "react-hot-toast";
-import "./globals.css";
 import { ThemeProvider } from "@/src/components/theme-provider";
 import { TotalPriceProvider } from "@/src/context/TotalPriceContext";
 import { OrderProvider } from "@/src/context/OrderContext";
