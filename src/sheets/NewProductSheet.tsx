@@ -24,35 +24,41 @@ import {
   SelectItem,
 } from "@/src/components/ui/select";
 import { Button } from "@/src/components/ui/button";
+import { PlusCircle } from "lucide-react";
 export default function NewProductSheet() {
   return (
     <Sheet>
-      <SheetTrigger className="bg-black text-white px-4 py-3 rounded text-xs font-medium">
-        Add New Product
+      <SheetTrigger className="">
+        <div className="flex items-center justify-center bg-[#374c69] text-xs text-white rounded px-6 h-8 gap-1">
+          <PlusCircle className="h-3.5 w-3.5" />
+          <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+            Add Product
+          </span>
+        </div>
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
           <Card className="w-full max-w-xl border-none p-0 shadow-none">
             <CardHeader className="pl-0">
-              <CardTitle>Add New Product</CardTitle>
+              <CardTitle className="text-[#374c69]">Add New Product</CardTitle>
               <CardDescription>
                 Fill out the form to add a new product to the database.
               </CardDescription>
             </CardHeader>
             <CardContent className="p-0">
               <form className="grid gap-4">
-                <div className="grid gap-2">
+                <div className="grid gap-4">
                   <Label htmlFor="name">Product Name</Label>
                   <Input id="name" placeholder="Enter product name" />
                 </div>
-                <div className="grid gap-2">
+                <div className="grid gap-4">
                   <Label htmlFor="description">Description</Label>
                   <Textarea
                     id="description"
                     placeholder="Enter product description"
                   />
                 </div>
-                <div className="grid gap-2">
+                <div className="grid gap-4">
                   <Label htmlFor="price">Price</Label>
                   <Input
                     id="price"
@@ -60,9 +66,9 @@ export default function NewProductSheet() {
                     placeholder="Enter product price"
                   />
                 </div>
-                <div className="grid gap-2">
+                <div className="grid gap-4">
                   <Label htmlFor="category">Category</Label>
-                  <Select id="category">
+                  <Select>
                     <SelectTrigger>
                       <SelectValue placeholder="Select category" />
                     </SelectTrigger>
@@ -74,14 +80,16 @@ export default function NewProductSheet() {
                     </SelectContent>
                   </Select>
                 </div>
-                <div className="grid gap-2">
+                <div className="grid gap-4">
                   <Label htmlFor="image">Product Image</Label>
                   <Input id="image" type="file" />
                 </div>
               </form>
             </CardContent>
             <CardFooter className="p-0 mt-6">
-              <Button className="ml-auto">Save Product</Button>
+              <Button className="mr-auto text-xs bg-[#374c69]">
+                Save Product
+              </Button>
             </CardFooter>
           </Card>
         </SheetHeader>

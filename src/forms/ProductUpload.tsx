@@ -2,6 +2,38 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import WidgetToolbar from "../components/WidgetToolbar";
 import Image from "next/image";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card";
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../components/ui/dropdown-menu";
+import { Button } from "../components/ui/button";
+import {
+  File,
+  ListFilter,
+  PlusCircle,
+  SearchIcon,
+  TrashIcon,
+} from "lucide-react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../components/ui/table";
+import NewProductSheet from "../sheets/NewProductSheet";
+import { Input } from "../components/ui/input";
 
 export default async function Page() {
   const session = await auth();
@@ -20,224 +52,159 @@ export default async function Page() {
 
   // If authenticated and isAdmin, render the page content
   return (
-    <div className="w-full flex flex-col">
-      <WidgetToolbar />
-
-      <div className="w-full flex flex-col">
-        <div className="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-          <div className="align-middle w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
-            <table className="w-full">
-              <thead>
-                <tr>
-                  <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                    Name
-                  </th>
-                  <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                    Title
-                  </th>
-                  <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                    Status
-                  </th>
-                  <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                    Role
-                  </th>
-                  <th className="px-6 py-3 border-b border-gray-200 bg-gray-50" />
-                </tr>
-              </thead>
-              <tbody className="bg-white">
-                <tr>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                    <div className="flex items-center">
-                      <div className="flex-shrink-0 h-14 w-14">
-                        <Image
-                          className="h-14 w-14 rounded"
-                          src="/images/product1.jpg"
-                          alt=""
-                          width={10}
-                          height={10}
-                        />
-                      </div>
-                      <div className="ml-4">
-                        <div className="text-sm leading-5 font-medium text-gray-900">
-                          Bernard Lane
-                        </div>
-                        <div className="text-sm leading-5 text-gray-500">
-                          bernardlane@example.com
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                    <div className="text-sm leading-5 text-gray-900">
-                      Director
-                    </div>
-                    <div className="text-sm leading-5 text-gray-500">
-                      Human Resources
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                      Active
+    <div className="w-full pb-10 bg-[#f9f9f9] h-screen">
+      <h2 className="mb-4 text-2xl">Products</h2>
+      <Card>
+        <CardHeader>
+          <CardTitle>
+            <div className="flex justify-between items-center">
+              <div className="">
+                <div className="w-2/4 md:w-full max-w-sm relative">
+                  <SearchIcon className="w-4 h-4 absolute left-2.5 top-2.5 text-gray-500 dark:text-gray-400" />
+                  <Input type="search" placeholder="Search" className="pl-8" />
+                </div>
+              </div>
+              <div className="">
+                <div className="ml-auto flex items-center gap-2">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="outline" size="sm" className="h-8 gap-1">
+                        <ListFilter className="h-3.5 w-3.5" />
+                        <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                          Filter
+                        </span>
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuLabel>Filter by</DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuCheckboxItem checked>
+                        Active
+                      </DropdownMenuCheckboxItem>
+                      <DropdownMenuCheckboxItem>Draft</DropdownMenuCheckboxItem>
+                      <DropdownMenuCheckboxItem>
+                        Archived
+                      </DropdownMenuCheckboxItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                  <Button size="sm" variant="outline" className="h-8 gap-1">
+                    <File className="h-3.5 w-3.5" />
+                    <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                      Export
                     </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                    Owner
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                    <a
-                      href="#"
-                      className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline"
-                    >
-                      Edit
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                    <div className="flex items-center">
-                      <div className="flex-shrink-0 h-14 w-14">
-                        <Image
-                          className="h-14 w-14 rounded"
-                          src="/images/product2.jpg"
-                          alt=""
-                          width={10}
-                          height={10}
-                        />
-                      </div>
-                      <div className="ml-4">
-                        <div className="text-sm leading-5 font-medium text-gray-900">
-                          Bernard Lane
-                        </div>
-                        <div className="text-sm leading-5 text-gray-500">
-                          bernardlane@example.com
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                    <div className="text-sm leading-5 text-gray-900">
-                      Director
-                    </div>
-                    <div className="text-sm leading-5 text-gray-500">
-                      Human Resources
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                      Active
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                    Owner
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                    <a
-                      href="#"
-                      className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline"
-                    >
-                      Edit
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                    <div className="flex items-center">
-                      <div className="flex-shrink-0 h-14 w-14">
-                        <Image
-                          className="h-14 w-14 rounded"
-                          src="/images/product1.jpg"
-                          alt=""
-                          width={10}
-                          height={10}
-                        />
-                      </div>
-                      <div className="ml-4">
-                        <div className="text-sm leading-5 font-medium text-gray-900">
-                          Bernard Lane
-                        </div>
-                        <div className="text-sm leading-5 text-gray-500">
-                          bernardlane@example.com
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                    <div className="text-sm leading-5 text-gray-900">
-                      Director
-                    </div>
-                    <div className="text-sm leading-5 text-gray-500">
-                      Human Resources
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                      Inactive
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                    Owner
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                    <a
-                      href="#"
-                      className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline"
-                    >
-                      Edit
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-4 whitespace-no-wrap">
-                    <div className="flex items-center">
-                      <div className="flex-shrink-0 h-14 w-14">
-                        <Image
-                          className="h-14 w-14 rounded"
-                          src="/images/product2.jpg"
-                          alt=""
-                          width={10}
-                          height={10}
-                        />
-                      </div>
-                      <div className="ml-4">
-                        <div className="text-sm leading-5 font-medium text-gray-900">
-                          Bernard Lane
-                        </div>
-                        <div className="text-sm leading-5 text-gray-500">
-                          bernardlane@example.com
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap">
-                    <div className="text-sm leading-5 text-gray-900">
-                      Director
-                    </div>
-                    <div className="text-sm leading-5 text-gray-500">
-                      Human Resources
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap">
-                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                      Inactive
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
-                    Owner
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                    <a
-                      href="#"
-                      className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline"
-                    >
-                      Edit
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+                  </Button>
+                  <NewProductSheet />
+                </div>
+              </div>
+            </div>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[80px] hidden md:table-cell">
+                  Image
+                </TableHead>
+                <TableHead className="max-w-[150px]">Name</TableHead>
+                <TableHead>Quantity</TableHead>
+                <TableHead>Total</TableHead>
+                <TableHead />
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell className="hidden md:table-cell">
+                  <img
+                    src="/images/product1.jpg"
+                    alt="Product image"
+                    className="aspect-square rounded-md object-cover"
+                    width="64"
+                    height="64"
+                  />
+                </TableCell>
+                <TableCell className="font-medium">
+                  Biologische sinaasappel vla
+                </TableCell>
+                <TableCell>2</TableCell>
+                <TableCell>$120.00</TableCell>
+                <TableCell className="hidden md:table-cell">
+                  <Button variant="outline" size="icon">
+                    <TrashIcon className="h-4 w-4" />
+                    <span className="sr-only">Delete</span>
+                  </Button>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="hidden md:table-cell">
+                  <img
+                    src="/images/product2.jpg"
+                    alt="Product image"
+                    className="aspect-square rounded-md object-cover"
+                    width="64"
+                    height="64"
+                  />
+                </TableCell>
+                <TableCell className="font-medium">
+                  Kwark met vruchten 565ml
+                </TableCell>
+                <TableCell>3</TableCell>
+                <TableCell>$49.00</TableCell>
+                <TableCell className="hidden md:table-cell">
+                  <Button variant="outline" size="icon">
+                    <TrashIcon className="h-4 w-4" />
+                    <span className="sr-only">Delete</span>
+                  </Button>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="hidden md:table-cell">
+                  <img
+                    src="/images/placeholder.svg"
+                    alt="Product image"
+                    className="aspect-square rounded-md object-cover"
+                    width="64"
+                    height="64"
+                  />
+                </TableCell>
+                <TableCell className="font-medium">
+                  Biologische sinaasappel vla
+                </TableCell>
+                <TableCell>2</TableCell>
+                <TableCell>$120.00</TableCell>
+                <TableCell className="hidden md:table-cell">
+                  <Button variant="outline" size="icon">
+                    <TrashIcon className="h-4 w-4" />
+                    <span className="sr-only">Delete</span>
+                  </Button>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="hidden md:table-cell">
+                  <img
+                    src="/images/placeholder.svg"
+                    alt="Product image"
+                    className="aspect-square rounded-md object-cover"
+                    width="64"
+                    height="64"
+                  />
+                </TableCell>
+                <TableCell className="font-medium">
+                  Kwark met vruchten 565ml
+                </TableCell>
+                <TableCell>3</TableCell>
+                <TableCell>$49.00</TableCell>
+                <TableCell className="hidden md:table-cell">
+                  <Button variant="outline" size="icon">
+                    <TrashIcon className="h-4 w-4" />
+                    <span className="sr-only">Delete</span>
+                  </Button>
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
     </div>
   );
 }
